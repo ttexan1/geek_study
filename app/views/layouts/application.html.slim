@@ -2,9 +2,33 @@ doctype html
 html
   head
     title
-      | StudyApp
+      | AwsomeEvents
+    meta[charset="utf8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_include_tag 'application', 'data-turbolinks-track': true
   body
-    = yield
+    header.navbar.navbar-default[role="navigation"]
+      .container
+        .navbar-header
+          button.navbar-toggle[type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"]
+            span[ckass="sr-only"]
+              | Toggle navigation
+            span[ckass="icon-bar"]
+            span[ckass="icon-bar"]
+            span[ckass="icon-bar"]
+          = link_to 'AwsomeEvents', root_path, class:'navbar-brand'
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li = link_to 'イベントを作る', new_host_event_path
+            li = link_to '管理者ログイン', new_owner_session_path
+            li = link_to 'ユーザーログイン', new_user_session_path
+    .container
+      - if flash[:notice]
+        .alert.alert-success
+          = flash[:notice]
+      - if flash[:alert]
+        .alert.alert-danger
+          = flash[:alert]
+      = yield
