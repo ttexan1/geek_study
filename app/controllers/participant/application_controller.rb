@@ -1,4 +1,4 @@
 class Participant::ApplicationController < ActionController::Base
-  before_action :authenticate_owner!
+  before_action :authenticate_user!
 
 end

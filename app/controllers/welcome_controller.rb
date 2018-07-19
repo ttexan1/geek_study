@@ -1,8 +1,4 @@
 class WelcomeController < ApplicationController
-  def participant
-
-  end
-  def host
-
+  def index
   end
 end
