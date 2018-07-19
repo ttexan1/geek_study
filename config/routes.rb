@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   # root 'welcome#index'
 
-  root 'welcome#participant'
-  get '/host' => 'welcome#host', as: :host_root
-
+  root 'welcome#index'
 
   devise_for :users, path: 'participant', controllers:{
     sessions: 'participant/sessions',
