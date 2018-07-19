@@ -1,5 +1,27 @@
 Rails.application.routes.draw do
-  devise_for :owners
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # root 'welcome#index'
+
+  root 'welcome#participant'
+  get '/host' => 'welcome#host', as: :host_root
+
+
+  devise_for :owners, path: 'host', controllers:{
+    sessions: 'host/sessions',
+    registrations: 'host/registrations',
+    passwords: 'host/passwords'
+  }
+
+  namespace :participant do
+    resources :events
+  end
+
+  devise_for :owners, path: 'host', controllers:{
+    sessions: 'host/sessions',
+    registrations: 'host/registrations',
+    passwords: 'host/passwords'
+  }
+
+  namespace :host do
+    resources :events
+  end
 end
