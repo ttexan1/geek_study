@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: chat_rooms
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  owner_id   :integer
+#  user_id    :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner_id: 1
+  user_id: 1
+  name: MyString
+
+two:
+  owner_id: 1
+  user_id: 1
+  name: MyString
