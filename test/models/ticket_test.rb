@@ -6,8 +6,8 @@
 #  comments   :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  event_id   :integer
-#  user_id    :integer
+#  event_id   :integer          not null
+#  user_id    :integer          not null
 #
 
 require 'test_helper'

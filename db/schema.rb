@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180719140503) do
+ActiveRecord::Schema.define(version: 20180720030840) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.integer "owner_id"
@@ -20,15 +20,24 @@ ActiveRecord::Schema.define(version: 20180719140503) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.integer "owner_id"
-    t.string "name"
-    t.string "place"
-    t.string "image"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.text "description"
+    t.integer "user_id"
+    t.integer "event_id", null: false
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer "owner_id", null: false
+    t.string "name", null: false
+    t.string "place", null: false
+    t.string "image"
+    t.datetime "start_at", null: false
+    t.datetime "end_at", null: false
+    t.text "description"
+    t.text "content", null: false
     t.string "condition"
     t.integer "level"
     t.integer "status"
@@ -55,10 +64,12 @@ ActiveRecord::Schema.define(version: 20180719140503) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "name"
+    t.string "name", null: false
     t.string "job"
     t.string "thumbnail"
-    t.text "comments"
+    t.text "description"
+    t.integer "type", default: 0, null: false
+    t.integer "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_owners_on_email", unique: true
@@ -66,8 +77,8 @@ ActiveRecord::Schema.define(version: 20180719140503) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "event_id"
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
     t.text "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -84,11 +95,11 @@ ActiveRecord::Schema.define(version: 20180719140503) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "name"
+    t.string "name", null: false
     t.string "thumbnail"
-    t.text "comments"
+    t.text "description"
     t.string "phone"
-    t.integer "type"
+    t.integer "type", default: 0, null: false
     t.integer "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
