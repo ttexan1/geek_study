@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180720030840) do
     t.string "job"
     t.string "thumbnail"
     t.text "description"
-    t.integer "type", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.integer "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20180720030840) do
     t.string "thumbnail"
     t.text "description"
     t.string "phone"
-    t.integer "type", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.integer "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

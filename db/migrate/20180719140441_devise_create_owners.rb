@@ -36,7 +36,7 @@ class DeviseCreateOwners < ActiveRecord::Migration[5.1]
       t.string :job
       t.string :thumbnail
       t.text :description
-      t.integer :type, null: false, default: 0
+      t.integer :status, null: false, default: 0
       t.integer :gender
 
       t.timestamps null: false

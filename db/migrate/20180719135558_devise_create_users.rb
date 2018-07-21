@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :thumbnail
       t.text :description
       t.string :phone
-      t.integer :type, null: false, default: 0
+      t.integer :status, null: false, default: 0
       t.integer :gender
 
       t.timestamps null: false
