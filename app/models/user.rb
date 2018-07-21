@@ -29,8 +29,13 @@
 #
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :tickets
+  has_many :events, through: :tickets
+
+  validates :name, presence: true
+
+  enum status: { normal: 0, warned: 10, deleted: 20}
+  enum gender: { male: 0, female: 10, other: 20 }
 end

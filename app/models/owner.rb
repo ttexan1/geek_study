@@ -29,9 +29,12 @@
 #
 
 class Owner < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :events
+
+  validates :name, presence: true
+
+  enum status: { normal: 0, tester: 10, deleted: 20}
+  enum gender: { male: 0, female: 10, other: 20 }
 end
