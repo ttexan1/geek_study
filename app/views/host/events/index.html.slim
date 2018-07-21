@@ -1,0 +1,21 @@
+- now = Time.zone.now
+.page-header
+  h1 イベント一覧!
+.list-groups
+  /= search_form_for(@q, url: root_path, class: 'well') do |f|
+    .form-group
+      = f.label :name_cont, 'イベント名'
+      = f.text_field :name_cont, class: 'form-control'
+    .form-group
+      = f.label :start_time_gteq, '開催日'
+      = f.date_select :start_time_gteq, start_year: now.year, end_year: now.year + 1, prompt:true, class: 'form-control'
+    = f.submit '検索', class: 'btn btn-default'
+
+  - @events.each do |event|
+    = link_to host_event_path(event), class: 'list-group-item' do
+      h4.list-group-item-heading = event.name
+      p.list-group-item-text
+        = event.start_at.strftime('%Y/%m/%d %H:%M')
+        | -
+        = event.end_at.strftime('%Y/%m/%d %H:%M')
+  = paginate @events

@@ -13,15 +13,16 @@ html
       .container
         .navbar-header
           button.navbar-toggle[type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"]
-            span[ckass="sr-only"]
+            span[class="sr-only"]
               | Toggle navigation
-            span[ckass="icon-bar"]
-            span[ckass="icon-bar"]
-            span[ckass="icon-bar"]
+            span[class="icon-bar"]
+            span[class="icon-bar"]
+            span[class="icon-bar"]
           = link_to 'AwsomeEvents', root_path, class:'navbar-brand'
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right
-            li = link_to 'ログアウト', destroy_owner_session_path
+            li = link_to '管理者ログイン', new_owner_session_path
+            li = link_to 'ユーザーログイン', new_user_session_path
     .container
       - if flash[:notice]
         .alert.alert-success

@@ -31,6 +31,8 @@ class Event < ApplicationRecord
   validates :content, presence: true, length: { maximum: 2000 }
   validate :start_time_should_be_before_end_time
 
+  enum status: { close: 0, open: 10 }
+
 
   def created_by?(user)
     return false unless user

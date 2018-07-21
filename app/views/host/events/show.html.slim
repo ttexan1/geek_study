@@ -1,0 +1,42 @@
+.page-header
+  h1 = @event.name
+
+.row
+  .col-md-8
+    - if @event.image?
+      .thumbnail
+        = image_tag @event.image.url
+
+    .panel.panel-default
+      .panel-heading 開催時間
+      .panel-body
+        = @event.start_at.strftime('%Y/%m/%d %H:%M')
+        | -
+        = @event.end_at.strftime('%Y/%m/%d %H:%M')
+
+    .panel.panel-default
+      .panel-heading 開催場所
+      .panel-body
+        = @event.place
+
+    .panel.panel-default
+      .panel-heading イベント内容
+      .panel-body
+        = @event.content
+
+  .col-md-4
+    = link_to 'イベントを編集する', edit_host_event_path(@event), class: "btn btn-info btn-lg btn-block"
+    = link_to 'イベントを削除する', host_event_path(@event), class: "btn btn-danger btn-lg btn-block", method: :delete, data: { confirm: '本当に削除しますか？'}
+
+    hr
+    .panel.panle-default
+      .panel-heading 参加予定者
+      .panle-body
+        ul.list-unstyled
+          - if @event.users
+            - @event.users.each do |user|
+              li = user.name
+            li
+            | <合計
+            = @event.users.length
+            | 人>
