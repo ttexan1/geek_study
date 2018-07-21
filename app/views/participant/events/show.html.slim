@@ -1,0 +1,54 @@
+.page-header
+  h1 = @event.name
+
+.row
+  .col-md-8
+    - if @event.image?
+      .thumbnail
+        = image_tag @event.image.url
+    .panel.panel-default
+      .panel-heading 主催者
+      .panel-body
+        - if @event.owner
+          = @event.owner.name
+          /link作りたければそのページも作らないとね
+        - else
+          | 作成者は退会しました。
+
+    .panel.panel-default
+      .panel-heading 開催時間
+      .panel-body
+        = @event.start_at.strftime('%Y/%m/%d %H:%M')
+        | -
+        = @event.end_at.strftime('%Y/%m/%d %H:%M')
+
+    .panel.panel-default
+      .panel-heading 開催場所
+      .panel-body
+        = @event.place
+
+    .panel.panel-default
+      .panel-heading イベント内容
+      .panel-body
+        = @event.content
+
+  .col-md-4
+    - if @ticket
+      = link_to '参加をキャンセルする', participant_event_ticket_path(@event, @ticket), method: :delete, class: 'btn btn-warning btn-lg btn-block'
+    - elsif user_signed_in?
+      button.btn.btn-primary.btn-lg.btn-block data-toggle="modal" data-target="#createTicket"
+        | 参加する
+      .modal.fade#createTicket tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true"
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close type="button" data-dismiss="modal" aria-hidden="true" &times;
+              h4.modal-title#dialogHeader 参加コメント
+            = form_for(@event.tickets.build, url: participant_event_tickets_path(@event)) do |f|
+              .modal-body
+                = f.text_field :comments, class: "form-control"
+              .modal-footer
+                button.btn.btn-default type="button" data-dismiss="modal" キャンセル
+                = f.button '送信', class: 'btn btn-primary', data: { disable_with: '送信中・・・'}
+    - else
+      = link_to '参加する', new_participant_event_ticket_path(@event), class: 'btn btn-primary btn-lg btn-blocks'

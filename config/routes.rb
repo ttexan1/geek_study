@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   }
 
   namespace :participant do
-    resources :events
+    resources :events, only: [:index, :show] do
+      resources :tickets, only: [:create, :destroy]
+    end
+    resources :owners, only: [:show]
   end
 
   devise_for :owners, path: 'host', controllers:{
