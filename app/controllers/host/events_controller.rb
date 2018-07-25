@@ -30,7 +30,7 @@ class Host::EventsController < Host::ApplicationController
   def update(id, event)
     @event = current_owner.events.find(id)
     if @event.update(event)
-      redirect_to host_events_path, notice: '更新しました'
+      redirect_to host_event_path(id), notice: '更新しました'
     else
       render :edit
     end

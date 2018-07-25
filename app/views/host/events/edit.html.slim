@@ -1,28 +1,30 @@
 - now = Time.zone.now
+.events.edit
+  .page-header
+    h1 イベント情報編集
 
-.page-header
-  h1 イベント情報編集
+  = simple_form_for(@event, url: host_event_path(current_owner,@event),class: 'form-horizontal', role: 'form', method: :put) do |f|
+    - if @event.errors.any?
+      .alert.alert-danger
+        ul
+          - @event.errors.full_messages.each do |msg|
+            li = msg
 
-= simple_form_for(@event, url: host_event_path(current_owner,@event),class: 'form-horizontal', role: 'form', method: :put) do |f|
-  - if @event.errors.any?
-    .alert.alert-danger
-      ul
-        - @event.errors.full_messages.each do |msg|
-          li = msg
+    = f.input :name, input_html: { class: 'form-control'}
+    = f.input :place, input_html: { class: 'form-control'}
+    - if @event.image?
+      .thumbnail
+        = image_tag @event.event_image.url
+    /= f.file_field :event_image
+    /= f.hidden_field :event_image_cache
+    - if @event.image?
+      .checkbox
+        label
+          = f.check_box :remove_event_image
+          | 画像を削除する
+    = f.input :start_at, start_year: now.year, end_year: now.year + 1
+    = f.input :end_at, start_year: now.year, end_year: now.year + 1
+    = f.input :content, input_html: { class: 'form-control'}, row: 10
+    = f.submit '更新', class: 'btn btn-primary', data: { disable_with: '更新中・・・'}
 
-  = f.input :name, input_html: { class: 'form-control'}
-  = f.input :place, input_html: { class: 'form-control'}
-  - if @event.image?
-    .thumbnail
-      = image_tag @event.event_image.url
-  /= f.file_field :event_image
-  /= f.hidden_field :event_image_cache
-  - if @event.image?
-    .checkbox
-      label
-        = f.check_box :remove_event_image
-        | 画像を削除する
-  = f.input :start_at, start_year: now.year, end_year: now.year + 1
-  = f.input :end_at, start_year: now.year, end_year: now.year + 1
-  = f.input :content, input_html: { class: 'form-control'}, row: 10
-  = f.submit '更新', class: 'btn btn-default', data: { disable_with: '更新中・・・'}
+  = link_to "戻る", host_event_path(@event), class: "btn btn-default"

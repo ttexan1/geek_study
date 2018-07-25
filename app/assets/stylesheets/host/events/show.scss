@@ -1,0 +1,19 @@
+.events.show{
+  .panel.panel-default{
+    .panel-heading{
+      border-bottom: 0;
+    }
+    .panle-body{
+      ul.list-unstyled{
+        li.list-group-item{
+          border: none;
+          border-radius: 0;
+          border-top: 1px solid #dddddd;
+          &.gray{
+            background: #f5f5f5;
+          }
+        }
+      }
+    }
+  }
+}

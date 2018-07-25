@@ -1,12 +1,14 @@
 - now = Time.zone.now
-.page-header
-  h1 イベント一覧!
-.list-groups
-  - @events.each do |event|
-    = link_to host_event_path(event), class: 'list-group-item' do
-      h4.list-group-item-heading = event.name
-      p.list-group-item-text
-        = event.start_at.strftime('%Y/%m/%d %H:%M')
-        | -
-        = event.end_at.strftime('%Y/%m/%d %H:%M')
-  = paginate @events
+.events.index
+  .page-header
+    h1 イベント一覧!
+    .new-link = link_to '新しいイベントを作る', new_host_event_path, class: 'btn btn-default'
+  .list-groups
+    - @events.each do |event|
+      = link_to host_event_path(event), class: 'list-group-item' do
+        h4.list-group-item-heading = event.name
+        p.list-group-item-text
+          = event.start_at.strftime('%Y/%m/%d %H:%M')
+          | -
+          = event.end_at.strftime('%Y/%m/%d %H:%M')
+    = paginate @events
