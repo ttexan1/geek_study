@@ -30,6 +30,9 @@ class Host::EventsController < Host::ApplicationController
   def update(id, event)
     @event = current_owner.events.find(id)
     if @event.update(event)
+      @event.users.each do |user|
+        EventMailer.change(user, @event).deliver_now
+      end
       redirect_to host_event_path(id), notice: '更新しました'
     else
       render :edit

@@ -1,0 +1,22 @@
+p
+  = @user.name
+  | 様が参加予定のイベント『
+  = @event.name
+  |』の詳細に変更がありました。
+
+p 【主催者】
+
+= @event.owner.name
+
+p 【開催時間】
+
+= @event.start_at.strftime('%Y/%m/%d %H:%M')
+| -
+= @event.end_at.strftime('%Y/%m/%d %H:%M')
+
+p 【開催場所】
+= @event.place
+
+p 【イベント詳細】
+
+= @event.content
