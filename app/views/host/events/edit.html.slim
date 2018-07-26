@@ -3,7 +3,7 @@
   .page-header
     h1 イベント情報編集
 
-  = simple_form_for(@event, url: host_event_path(current_owner,@event),class: 'form-horizontal', role: 'form', method: :put) do |f|
+  = simple_form_for(@event, url: host_event_path(@event),class: 'form-horizontal', role: 'form', method: :put) do |f|
     - if @event.errors.any?
       .alert.alert-danger
         ul
