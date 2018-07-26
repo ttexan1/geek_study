@@ -21,7 +21,7 @@ class Host::EventsController < Host::ApplicationController
     @event = Event.new(event)
     @event.owner_id = current_owner.id
     if @event.save
-      redirect_to host_events_path, notice: '作成しました'
+      redirect_to host_event_path(@event), notice: '作成しました'
     else
       render :new
     end

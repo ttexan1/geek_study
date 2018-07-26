@@ -23,6 +23,8 @@ class Event < ApplicationRecord
   has_many :tickets
   has_many :users, through: :tickets
 
+  mount_uploader :image, EventImageUploader
+
   validates :content, presence: true
   validates :start_at, presence: true
   validates :end_at, presence: true
