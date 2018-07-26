@@ -15,12 +15,12 @@
     - if @event.image?
       .thumbnail
         = image_tag @event.event_image.url
-    /= f.file_field :event_image
-    /= f.hidden_field :event_image_cache
+    = f.file_field :image
+    = f.hidden_field :image_cache
     - if @event.image?
       .checkbox
         label
-          = f.check_box :remove_event_image
+          = f.check_box :remove_image
           | 画像を削除する
     = f.input :start_at, start_year: now.year, end_year: now.year + 1
     = f.input :end_at, start_year: now.year, end_year: now.year + 1

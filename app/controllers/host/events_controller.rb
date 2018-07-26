@@ -1,5 +1,5 @@
 class Host::EventsController < Host::ApplicationController
-  permits :condition, :content, :description, :end_at, :image, :level, :name, :place, :start_at, :status
+  permits :condition, :content, :description, :end_at, :image, :image_cache, :level, :name, :place, :remove_image, :start_at, :status
 
   def index(page=1)
     @events = current_owner.events.page(page).per(10).order(:start_at)
