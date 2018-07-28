@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # root 'welcome#index'
 
   root 'welcome#index'
 
@@ -25,4 +24,6 @@ Rails.application.routes.draw do
   namespace :host do
     resources :events
   end
+
+  match '*path' => 'application#error404', via: :all
 end

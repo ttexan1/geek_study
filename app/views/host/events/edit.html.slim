@@ -3,7 +3,7 @@
   .page-header
     h1 イベント情報編集
 
-  = simple_form_for(@event, url: host_event_path(current_owner,@event),class: 'form-horizontal', role: 'form', method: :put) do |f|
+  = simple_form_for(@event, url: host_event_path(@event),class: 'form-horizontal', role: 'form', method: :put) do |f|
     - if @event.errors.any?
       .alert.alert-danger
         ul
@@ -15,12 +15,12 @@
     - if @event.image?
       .thumbnail
         = image_tag @event.event_image.url
-    /= f.file_field :event_image
-    /= f.hidden_field :event_image_cache
+    = f.file_field :image
+    = f.hidden_field :image_cache
     - if @event.image?
       .checkbox
         label
-          = f.check_box :remove_event_image
+          = f.check_box :remove_image
           | 画像を削除する
     = f.input :start_at, start_year: now.year, end_year: now.year + 1
     = f.input :end_at, start_year: now.year, end_year: now.year + 1

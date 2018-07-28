@@ -1,5 +1,5 @@
 class Host::EventsController < Host::ApplicationController
-  permits :condition, :content, :description, :end_at, :image, :level, :name, :place, :start_at, :status
+  permits :condition, :content, :description, :end_at, :image, :image_cache, :level, :name, :place, :remove_image, :start_at, :status
 
   def index(page=1)
     @events = current_owner.events.page(page).per(10).order(:start_at)
@@ -21,16 +21,19 @@ class Host::EventsController < Host::ApplicationController
     @event = Event.new(event)
     @event.owner_id = current_owner.id
     if @event.save
-      redirect_to host_events_path, notice: '作成しました'
+      redirect_to host_event_path(@event), notice: '作成しました'
     else
       render :new
     end
   end
 
-  def update(id, event)
-    @event = current_owner.events.find(id)
+  def update(event)
+    @event = current_owner.events.find(params[:id])
     if @event.update(event)
-      redirect_to host_event_path(id), notice: '更新しました'
+      @event.users.each do |user|
+        EventMailer.change(user, @event).deliver_now
+      end
+      redirect_to host_event_path(params[:id]), notice: '更新しました'
     else
       render :edit
     end
